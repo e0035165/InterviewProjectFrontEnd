@@ -56,7 +56,11 @@ function Activation() {
     }
 
     const GoToPersonalizedDashBoard = () => {
-        navigate("/"+username+"/dashboard")
+        navigate("/");
+    }
+
+    const GoToSignInPage = () => {
+        navigate("/sign_in")
     }
 
 
@@ -96,7 +100,10 @@ function Activation() {
             {login &&
                 <div>
                     <button onClick={GoToPersonalizedDashBoard}>Go to Dashboard</button>
+                    <button onClick={GoToSignInPage}>Go to Dashboard</button>
                 </div>
+
+                
             }
         </main>
     );
