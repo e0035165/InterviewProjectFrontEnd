@@ -36,7 +36,7 @@ function Activation() {
         g.preventDefault();
         console.log(jwt);
         axios.defaults.headers.common["Authorization"]=jwt;
-        //axios.defaults.headers.common["Content-Type"]='application/json';
+        
         console.log(axios.defaults.headers.common);
         const resp = await axios.post('http://localhost:8220/v1/personalAccount/activation',
             {"username":username,"password":password,"email":email},
@@ -51,6 +51,9 @@ function Activation() {
         if(resp.status===200) {
             setLogin(true);
             console.log(resp.data);
+            localStorage.setItem('username',username);
+            localStorage.setItem('password',password);
+            localStorage.setItem('Authorization',jwt);
         }
             
     }
@@ -65,12 +68,23 @@ function Activation() {
 
 
     return (
-        
-
-        <main class="form-signin">
-            <form onSubmit={Activate}>
-                <img class="mb-4" src="/assests/image.jpg" alt="" width="80" height="60"/>
-                <h1 class="h3 mb-3 fw-normal">Please Activate</h1>
+        <body>
+            <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+                    <h1 class="h3 mb-3 fw-normal m-0">
+                        Please Activate
+                        <div>
+                            <button button="button" className="btn btn-primary me-2" onClick={()=>{navigate('/')}}> Front-Page </button>
+                            <button button="button" className="btn btn-primary me-2" onClick={()=>{navigate('/sign_up')}}> Sign up </button>
+                            <button button="button" className="btn btn-primary me-2" onClick={()=>{navigate('/sign_in')}}> Sign in </button>
+                        </div>
+                    </h1>
+                    
+            </div>
+            
+            <div class="form-signin d-flex justify-content-center align-items-center min-vh-100">
+            <form className="text-center mb-4" onSubmit={Activate}>
+                <img class="mb-4" src="assets/react.svg" alt="" width="180" height="180"/>
+                
 
                 <div class="form-floating">
                     <label htmlfor="floatingUsername">Username: </label>
@@ -105,7 +119,11 @@ function Activation() {
 
                 
             }
-        </main>
+            </div>
+
+        </body>
+
+        
     );
 
 
